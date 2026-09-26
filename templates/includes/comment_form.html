@@ -1,8 +1,9 @@
 {% if user.is_authenticated %}
+  {% load crispy_forms_tags %}
   <form action="{% url 'blog:comment-create' post.pk %}" method="post">
     {% csrf_token %}
     <label>Add new comment
-      <textarea name="content" class="form-control"></textarea>
+      {{ form|crispy }}
     </label>
     <br>
     <button type="submit" class="btn btn-primary mt-2">
