@@ -1,5 +1,7 @@
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from blog.models import Post, Commentary
 
@@ -18,7 +20,7 @@ class PostDetailView(generic.DetailView):
                 )
 
 
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Commentary
     fields = ("content",)
     template_name = "includes/comment_form.html"
